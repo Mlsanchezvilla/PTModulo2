@@ -9,6 +9,17 @@ var traverseDomAndCollectElements = function (matchFunc, startEl) {
   // usa matchFunc para identificar elementos que matchien
 
   // TU CÓDIGO AQUÍ
+
+  if (matchFunc(startEl)){
+    resultSet.push(startEl);
+  }
+
+  for (let i = 0 ; i < startEl.children.length; i++) {
+    const child = startEl.children[i];
+    resultSet = resultSet.concat(traverseDomAndCollectElements(matchFunc,child));
+  }
+
+  return resultSet;
 };
 
 // Detecta y devuelve el tipo de selector
@@ -16,6 +27,14 @@ var traverseDomAndCollectElements = function (matchFunc, startEl) {
 
 var selectorTypeMatcher = function (selector) {
   // tu código aquí
+
+  if (selector [0]=== "#") return "id";
+  if(selector [0]=== ".") return "class";
+
+  if(selector.includes(".")) return "tag.class";
+
+  return "tag";
+
 };
 
 // NOTA SOBRE LA FUNCIÓN MATCH
@@ -26,10 +45,26 @@ var selectorTypeMatcher = function (selector) {
 var matchFunctionMaker = function (selector) {
   var selectorType = selectorTypeMatcher(selector);
   var matchFunction;
+
   if (selectorType === "id") {
+
+    //matchFunction = (ele) => ele.id===selector.slice(1);
+
+    matchFunction =(ele) => {
+      if (ele.id === selector.slice(1)) return true;
+      return false;
+    
+  }
+
+
   } else if (selectorType === "class") {
+    matchFunction = ele => ele.classList.contains(selector.slice(1))
   } else if (selectorType === "tag.class") {
+    let [tag,className] = selector.split(".");
+    matchFunction=ele => ele.classList.contains(className)&& ele.tagName.toLowerCase()===tag.toLowerCase();
   } else if (selectorType === "tag") {
+    matchFunction =(ele) => ele.tagName.toLowerCase() === selector.toLowerCase();
+
   }
   return matchFunction;
 };
