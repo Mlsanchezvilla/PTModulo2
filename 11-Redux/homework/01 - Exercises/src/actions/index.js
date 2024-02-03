@@ -9,6 +9,20 @@ const incremento = null;
 
 const decremento = null;
 
+
+const increment=() => {
+
+  return{
+    type:INCREMENTO
+  }
+};
+
+const decrement = () => {
+ return{
+  type:DECREMENTO
+ }
+};
+
 module.exports = {
   incremento,
   decremento

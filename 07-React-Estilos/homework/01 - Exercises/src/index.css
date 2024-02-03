@@ -12,3 +12,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.div {
+
+  display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+}
+
+/* const DivButtons = () => {
+   {
+    backgroundColor: miVariable ? 'red' : 'blue',
+    color: 'white',
+    padding: '10px',
+    textAlign: 'center'
+  }; */

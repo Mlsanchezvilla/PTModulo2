@@ -1,14 +1,21 @@
+import React from "react";
+import ReactDOM from "react.dom";
 const { createStore } = require("redux");
+import {provider} from "react-redux"
 const contador = require("./reducer");
 const { incremento, decremento } = require("./actions");
 
 // En esta línea creamos nuestro store. Pasándole como parámetro nuestro Reducer
-var store;
+
+const store = createStore(counter);
 
 // Obtenemos el elemento con el id `valor`.
-var valor;
+
+const elemento = document.getElementById('valor');
 
 // Esta función nos va a servir para actualizar nuestro DOM con el valor que tengamos en nuestro Store.
+
+
 // En el primer render y cada vez que nos subscribamos al Store.
 // Utilizamos el elemento obtenido arriba para mostrar el State.
 function renderContador() {
@@ -22,3 +29,10 @@ function renderContador() {
 
 // Por último, utilizamos los botones de nuestro HTML para que cada vez que hagamos click,
 // hagan un dispatch al store de la acción correspondiente:
+
+ReactDOM.render(
+  <provider store={store} >
+    <counter/>
+  </provider>,
+  document.getElementById("root")
+);
